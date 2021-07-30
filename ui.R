@@ -1,0 +1,21 @@
+install.packages("shiny")
+library(shiny)
+install.packages("UsingR")
+library(UsingR)
+
+ui <- fluidPage(
+  sliderInput(inputId = "num",
+              label = "Choose a number",
+              value = 25, min = 1, max = 100)
+)
+
+server <- function(input, output) {
+  output$hist <- renderPlot({
+    title <- "100 random normal values"
+    hist(rnorm(input$num), main = "title")
+    })
+}
+
+shinyApp(server = server, ui = ui)
+
+runApp()
